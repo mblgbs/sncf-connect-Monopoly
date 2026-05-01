@@ -103,3 +103,10 @@ The target service must:
 - `GET /auth/introspect` validate bearer token
 - `GET /auth/config` return MVP auth metadata
 - `GET /jwks-or-config` simplified discovery helper
+
+## Paiement ticket (Stripe)
+
+- Nouveau endpoint: `POST /tickets/payment-link`.
+- Payload: `{ "ticket_id": "...", "metadata": { ... } }`.
+- Reponse: `{ "url": "https://buy.stripe.com/..." }`.
+- Le service appelle le gateway `services-Monopoly-` via `SERVICES_MONOPOLY_BASE_URL`.

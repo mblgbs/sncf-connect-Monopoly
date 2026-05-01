@@ -1,3 +1,5 @@
+from typing import Any
+
 from pydantic import BaseModel, Field
 
 
@@ -31,3 +33,13 @@ class IntrospectionResponse(BaseModel):
     family_name: str | None = None
     email: str | None = None
     exp: int | None = None
+
+
+class TicketPaymentLinkRequest(BaseModel):
+    ticket_id: str = Field(..., min_length=1, max_length=128)
+    metadata: dict[str, Any] | None = None
+    amount_hint_cents: int | None = Field(default=None, gt=0, le=50_000_000)
+
+
+class PaymentLinkResponse(BaseModel):
+    url: str
